@@ -18,10 +18,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject shotSpawnArea;
     [SerializeField] float nextFire;
     [SerializeField] float fireRate;
+    AudioSource audioPlayer;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        audioPlayer = GetComponent<AudioSource>();
     }
     private void Update()
     {
@@ -29,6 +31,7 @@ public class PlayerController : MonoBehaviour
         {
             nextFire = Time.time + fireRate;
             Instantiate(shot, shotSpawnArea.transform.position, shotSpawnArea.transform.rotation);
+            audioPlayer.Play();
         }
     }
 
