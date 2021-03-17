@@ -10,14 +10,28 @@ public class Boundary
 
 public class PlayerController : MonoBehaviour
 {
-    Rigidbody rb;
-    [SerializeField]int speed;
-    [SerializeField] int tilt;
     public Boundary boundary;
-    [SerializeField] GameObject shot;
-    [SerializeField] GameObject shotSpawnArea;
-    [SerializeField] float nextFire;
-    [SerializeField] float fireRate;
+    
+    Rigidbody rb;
+
+    [SerializeField]
+    private int speed;
+
+    [SerializeField]
+    private int tilt;
+    
+    [SerializeField]
+    private GameObject shot;
+
+    [SerializeField]
+    private GameObject shotSpawnArea;
+
+    [SerializeField]
+    private float nextFire;
+
+    [SerializeField]
+    private float fireRate;
+
     AudioSource audioPlayer;
 
     void Start()
@@ -25,6 +39,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         audioPlayer = GetComponent<AudioSource>();
     }
+
     private void Update()
     {
         if (Input.GetButton("Fire1") && Time.time > nextFire) 
