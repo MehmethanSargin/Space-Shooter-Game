@@ -1,19 +1,35 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
     [SerializeField]
-    GameObject hazard;
+    private GameObject hazard;
+
     [SerializeField]
-    int spawnCount;
+    private int spawnCount;
+
     [SerializeField]
-    float spawnWait;
-    [SerializeField] 
-    float startWait;
+    private float spawnWait;
+
     [SerializeField]
-    float waveWait;
+    private float startWait;
+
+    [SerializeField]
+    private float waveWait;
+
+    [SerializeField]
+    Text scoreText;
+
+    private int score;
+
+    private bool gameOver = false;
+
+    [SerializeField]
+    GameObject gameOverPanel;
 
     void Start()
     {
@@ -34,6 +50,33 @@ public class GameController : MonoBehaviour
                 yield return new WaitForSeconds(spawnWait);
             }
             yield return new WaitForSeconds(waveWait);
-        }
+            if (gameOver == true)
+            {
+                GameOver();
+                break;
+            }
+        } 
+    }
+
+    public void UpdateScore() 
+    {
+        score += 10;
+        scoreText.text = "Score : " + score;
+    }
+
+    public void GameOver()
+    {
+        gameOver = true;
+        gameOverPanel.SetActive(true);
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(0); 
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }
